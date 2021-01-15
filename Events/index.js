@@ -28,6 +28,48 @@ myDiv2.addEventListener('mouseenter', () => {
 	console.log('Mouse entered DIV-2....');
 });
 
+// inner.addEventListener('click', (event) => {
+// 	console.log('Inner clicked....');
+
+// 	event.stopPropagation();
+// });
+
+function onClick() {
+	console.log('onClick/.....');
+}
+outer.addEventListener('mouseenter', (event) => {
+
+	const currentElement = document.getElementById('outer');
+	console.log(currentElement.childNodes.length);
+	if(currentElement.childNodes.length == 0) {
+		const inner = document.createElement('div')
+		inner.setAttribute('class', 'inner')
+		inner.setAttribute('id', 'inner')
+		inner.setAttribute('onclick', 'onClick()')
+		currentElement.appendChild(inner)
+	}
+	// event.stopPropagation();
+});
+
+outer.addEventListener('mouseleave', (event) => {
+
+	const currentElement = document.getElementById('outer');
+	console.log(currentElement.childNodes.length,'0000');
+	const innerChild = document.getElementById('inner');
+	console.log(event.target);
+	// if(event.target.id !== 'outer') {
+		currentElement.removeChild(innerChild)
+	// }
+	// if(currentElement.childNodes.length == 0) {
+	// 	const inner = document.createElement('div')
+	// 	inner.setAttribute('class', 'inner')
+	// 	inner.setAttribute('id', 'inner')
+	// 	currentElement.appendChild(inner)
+	// }
+	// event.stopPropagation();
+});
+
+
 // DRAG AND DROP
 
 var dragged;
@@ -56,3 +98,5 @@ document.addEventListener("drop", function(event) {
 document.addEventListener("dragover", function(event) {
 	event.preventDefault();	// prevent default to allow drop
   }, false);
+
+
